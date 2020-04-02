@@ -34,7 +34,7 @@ export class ListaProdutoComponent implements OnInit {
   getDescricaoSituacoesFromId(idSituacao: number): string {
     let desc = 'Deu ruim';
     this.situacoes.forEach(situacao => {
-      if (situacao.id == idSituacao) {
+      if (situacao.id === idSituacao) {
         desc = situacao.descricao;
       }
     });
