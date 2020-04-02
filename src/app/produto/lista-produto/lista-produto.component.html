@@ -1,0 +1,46 @@
+<h3>Gestão de produtos</h3>
+<mat-card class="card">
+  <mat-card-content>
+    <section>
+      <mat-form-field class="formField">
+        <input matInput placeholder="Nome" name="nome" [(ngModel)]="produto.nome" />
+      </mat-form-field>
+      <mat-form-field class="formField">
+        <input matInput placeholder="Valor" name="valor" width="200" [(ngModel)]="produto.valor" />
+      </mat-form-field>
+      <mat-form-field class="formField">
+        <mat-select placeholder="Situação do produto" [(ngModel)]="produto.situacao">
+        <mat-option *ngFor="let situacao of situacoes" [value]="situacao.id">{{ situacao.descricao }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </section>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="salvarProduto()">Salvar</button>
+    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="card" *ngIf="produtos.length > 0" >
+  <mat-card-content>
+    <section>
+
+      <mat-list>
+        <h3 matHeader>Produtos</h3>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let produto of produtos" >
+          <mat-icon matListIcon>person</mat-icon>
+          <span matLine>
+              {{ produto.id }} - {{ produto.nome }} - {{ produto.valor }} -
+              <span>{{ getDescricaoSituacoesFromId(produto.situacao) }}</span>
+              <button mat-icon-button color="accent" (click)="editarProduto(produto.id)">
+                  <mat-icon>edit</mat-icon>
+              </button>
+          </span>
+        </mat-list-item>
+      </mat-list>
+
+    </section>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,9 @@
+.formField {
+  display: block;
+  padding-right: 20px;
+}
+.card {
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,120 @@
+<section>
+  <mat-card class="mycard">
+    <mat-card-header>
+      <!-- String interpolation -->
+      <mat-card-title>{{ categoria.nome }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Id: {{ categoria.id }}</p>
+      <form>
+        <mat-form-field appearance="example-full-width">
+        <mat-label>Nome:</mat-label>
+        <input matInput value="{{ categoria.nome }}">
+        </mat-form-field>
+      </form>
+      <p>Valor: {{ categoria.valor }}</p>
+      <p>Index: {{ idx }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button [color]="color">Salvar</button>
+    </mat-card-actions>
+  </mat-card>
+</section>
+
+<!-- Property binding -->
+<button mat-button [disabled]="isDisabled">{{ isDisabled }}</button>
+
+<!-- Event binding -->
+<section>
+  <button mat-button color="accent" (click)="save()" >Save</button>
+  <button mat-button color="warn" (click)="inc()" >{{ buttonName }}</button>
+</section>
+
+<section>
+  <p>
+      <mat-checkbox color="warn" (change)="cbChange($event)">Disable / Enable</mat-checkbox>
+  </p>
+  <p>
+    <mat-form-field [ngStyle]="{ background: carsBackground }">
+        <mat-label>Cars</mat-label>
+        <mat-select matNativeControl required [disabled]="selectDisabled" (selectionChange)="selectChanged($event)" >
+          <mat-option value="1">Volvo</mat-option>
+          <mat-option value="2">Saab</mat-option>
+          <mat-option value="3">Mercedes</mat-option>
+          <mat-option value="4">Audi</mat-option>
+        </mat-select>
+     </mat-form-field>
+  </p>
+  <p>Selecionada a opção {{ selectedOption }}</p>
+</section>
+
+
+<section>
+    <mat-card class="mycard">
+        <mat-card-header>
+          <mat-card-title>Event binding com property binding</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-form-field><input matInput placeholder="Primeiro nome" (input)="inputName = $event.target.value" [value]="inputName"></mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button [color]="color">Butãum</button>
+          InputName: {{inputName}}
+        </mat-card-actions>
+      </mat-card>
+  </section>
+
+
+  <section>
+      <mat-card style="width: 400px; margin-bottom: 10px;">
+          <mat-card-content>
+            <form>
+                <mat-form-field style="width: 100%">
+                  <input matInput placeholder="Nome do produto" [(ngModel)]="produto.nome" name="nomeProduto">
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                  <input matInput placeholder="Valor" [(ngModel)]="produto.valor" name="valorProduto">
+                </mat-form-field>
+            </form>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <p *ngIf="showProdutoLabel()" >{{ produto.nome }} - {{ produto.valor }}</p>
+          </mat-card-actions>
+        </mat-card>
+    </section>
+
+<section>
+  <mat-list>
+    <h3 mat-subheader> Categorias</h3>
+    <mat-list-item *ngFor="let categoria of categorias; let i = index">
+      <mat-icon matListIcon>{{ categoria.icone }}</mat-icon>
+      <p matLine>
+        <span>{{ i }} - </span>
+        <span>{{ categoria.nome }} - </span>
+        <span class="demo-2">Produtos nesta Categoria: {{ categoria.qtdProdutos }} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-card style="margin: 5px;" *ngFor="let categoria of categorias; let i = index" >
+    <mat-card-content>
+      <form>
+          {{ i }} -
+          <mat-form-field style="padding-right: 10px;">
+            <input matInput placeholder="Categoria" disabled [(ngModel)]="categoria.nome" name="nomeCategoria">
+          </mat-form-field>
+          <mat-form-field style="padding-right: 10px;">
+            <input matInput placeholder="Quantidade de produtos" disabled [(ngModel)]="categoria.qtdProdutos" name="qtdProdutos">
+          </mat-form-field>
+          <button mat-button (click)="editarCategoria()">Action</button>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+
+</section>
