@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProdutoService } from './../produto.service';
+
 @Component({
   selector: 'app-lista-produto',
   templateUrl: './lista-produto.component.html',
@@ -39,9 +41,16 @@ export class ListaProdutoComponent implements OnInit {
     return desc;
   }
 
-  constructor() { }
+  constructor(private produtoService: ProdutoService) { }
 
   ngOnInit(): void {
+    console.log('ngOnInit Produto Component');
+    this.produtoService.buscaListaProdutos().subscribe((data: any) => {
+      console.log(data);
+      this.produtos = data;
+      console.log('------ Produtos retornados pelo Backend -------');
+      console.log(this.produtos);
+    });
   }
 
   inicializaNovoProduto() {

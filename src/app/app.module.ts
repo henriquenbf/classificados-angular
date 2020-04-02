@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CategoriaComponent } from './categoria/categoria.component';
@@ -36,7 +37,8 @@ import { ListaProdutoComponent } from './produto/lista-produto/lista-produto.com
     MatSelectModule,
     FormsModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

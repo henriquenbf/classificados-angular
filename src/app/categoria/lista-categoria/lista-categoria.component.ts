@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from '../categoria.service';
 
 @Component({
   selector: 'app-lista-categoria',
@@ -23,28 +24,7 @@ export class ListaCategoriaComponent implements OnInit {
 
   carsBackground = 'blue';
 
-  categorias = [
-    {
-      nome: 'Notebooks',
-      qtdProdutos: 6,
-      icone: 'alarm'
-    },
-    {
-      nome: 'Video-games',
-      qtdProdutos: 2,
-      icone: 'backup'
-    },
-    {
-      nome: 'Automóveis',
-      qtdProdutos: 5,
-      icone: 'android'
-    },
-    {
-      nome: 'Fones de ouvido',
-      qtdProdutos: 4,
-      icone: 'code'
-    }
-  ];
+  categorias;
 
   categoria = {
     id: 1,
@@ -58,9 +38,14 @@ export class ListaCategoriaComponent implements OnInit {
   };
 
 
-  constructor() {}
+  constructor(private categoriaService: CategoriaService) {}
 
   ngOnInit(): void {
+    console.log('ngOnInit Categoria Component');
+    this.categoriaService.buscaListaCategorias().subscribe((data) => {
+      console.log(data);
+      this.categorias = data[0];
+    });
     /*setInterval(() => {
       this.isDisabled = !this.isDisabled;
       this.idx++;
